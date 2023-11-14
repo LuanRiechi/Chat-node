@@ -6,8 +6,14 @@ services:
       context: ./backend
     ports:
       - "3000:3000"
-    volumes:
-      - ./frontend:/usr/app/frontend
+    networks:
+      - app-network
+  
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"
     networks:
       - app-network
 

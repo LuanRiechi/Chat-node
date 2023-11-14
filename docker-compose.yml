@@ -5,18 +5,10 @@ services:
     build:
       context: ./backend
     ports:
-      - "3000:3000"
-    networks:
-      - app-network
-  
+      - "3001:3001"
+
   frontend:
     build:
       context: ./frontend
     ports:
       - "80:80"
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge

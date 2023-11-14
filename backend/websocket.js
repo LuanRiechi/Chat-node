@@ -1,11 +1,5 @@
 const { Server } = require("socket.io");
-const cors = require("cors");
-
-const io = new Server({
-  cors: {
-    origin: "*",
-  },
-});
+const io = new Server();
 
 const users = [];
 const messages = [];

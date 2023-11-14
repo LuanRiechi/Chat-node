@@ -1,9 +1,17 @@
-const { io } = require("./http");
+const { Server } = require("socket.io");
+const cors = require("cors");
+
+const io = new Server({
+  cors: {
+    origin: "*",
+  },
+});
 
 const users = [];
 const messages = [];
 
 io.on("connection", (socket) => {
+  console.log(`Socket conectado: ${socket.id}`);
   socket.on("select_room", (data, callback) => {
     socket.join(data.room);
 
@@ -43,3 +51,6 @@ function getMessagesRoom(room) {
   const messagesRoom = messages.filter((message) => message.room === room);
   return messagesRoom;
 }
+
+console.log("WebSocket server is listening on port 3001");
+io.listen(3001);

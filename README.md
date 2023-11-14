@@ -18,6 +18,12 @@ TODO explica o front aqui
 
 ## Execução
 
+Clone o projeto na sua maquina, executando o comando:
+
+```bash
+git clone https://github.com/LuanRiechi/Chat-node.git
+```
+
 Criamos um docker-compose para melhor executar as duas partes, portanto simplesmente execute:
 
 ```bash

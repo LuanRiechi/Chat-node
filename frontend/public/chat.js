@@ -1,8 +1,31 @@
-const socket = io('http://localhost:3001');
-
 const urlSearch = new URLSearchParams(window.location.search);
 const username = urlSearch.get('username');
 const room = urlSearch.get('select_room');
+const server = urlSearch.get('server');
+const port = urlSearch.get('port');
+
+const socket = io(`http://${server}:${port}`);
+
+socket.on('connect', () => {
+  console.log('Conecatado ao socket');
+});
+
+socket.on('disconnect', () => {
+  console.log('Desconectado do socket');
+});
+
+socket.on('connect_error', (err) => {
+  handleErrors("Erro na Conexão com o Servidor");
+});
+
+socket.on('connect_failed', (err) => {
+  handleErrors("Falha na Conexão com o Servidor");
+});
+
+function handleErrors(error) {
+  window.alert(`${error.message}`);
+  window.location.href = "index.html";
+}
 
 const usernameDiv = document.getElementById("username");
 usernameDiv.innerHTML = `Olá <strong>${username}</strong> - Você está na sala <strong>${room}</strong>`
@@ -47,5 +70,6 @@ function createMessage(data) {
 };
 
 document.getElementById("logout").addEventListener("click", (event) => {
+  socket.disconnect();
   window.location.href = "index.html";
 })

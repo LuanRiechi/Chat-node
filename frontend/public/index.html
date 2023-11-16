@@ -14,14 +14,24 @@
     
     <div class="container">
       <h1>Boas vindas!</h1>
+
+      <div class="row1">
+        <label class="form-label">Servidor</label>
+        <input type="text" name="server" required pattern=".*\S+.*" placeholder="localhost" />
+      </div>
+
+
+      <div class="row2">
+        <label class="form-label">Porta</label>
+        <input type="text" name="port" required pattern=".*\S+.*" placeholder="3001" />
+      </div>
+
       <div class="row">
         <label class="form-label">Sala de bate-papo</label>
         <select name="select_room" id="select_room">
           <option value="-1">Selecione a sala</option>
           <option value="node">Node</option>
           <option value="java">Java</option>
-          <option value="reactjs">ReactJS</option>
-          <option value="elixir">Elixir</option>
         </select>
       </div>
 

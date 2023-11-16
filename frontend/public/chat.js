@@ -37,22 +37,30 @@ socket.emit("select_room", {
   messages.forEach(message => createMessage(message));
 });
 
+function sendMessage() {
+  const messageInput = document.getElementById("message_input");
+  const message = messageInput.value;
+
+  const data = {
+    room,
+    message,
+    username
+  };
+
+  socket.emit("message", data);
+
+  messageInput.value = "";
+}
+
 document.getElementById("message_input").addEventListener("keypress", (event) => {
   if (event.key === 'Enter') {
-    const message = event.target.value;
-
-    const data = {
-      room,
-      message,
-      username
-    }
-
-    socket.emit("message", data);
-
-    event.target.value = "";
+    sendMessage();
   }
 });
 
+document.getElementById("sendMsg").addEventListener("click", () => {
+  sendMessage();
+});
 socket.on("message", data => {
   createMessage(data);
 });
@@ -89,6 +97,7 @@ function createMessage(data) {
   var chatContent = document.getElementById('chat_content');
   chatContent.scrollTop = chatContent.scrollHeight;
 };
+
 
 document.getElementById("logout").addEventListener("click", (event) => {
   socket.disconnect();

@@ -13,22 +13,22 @@ socket.on('connect', () => {
 socket.on('disconnect', () => {
   console.log('Desconectado do socket');
 });
-
+/*
 socket.on('connect_error', (err) => {
   handleErrors("Erro na Conexão com o Servidor");
 });
 
 socket.on('connect_failed', (err) => {
   handleErrors("Falha na Conexão com o Servidor");
-});
+});*/
 
-function handleErrors(error) {
-  window.alert(`${error.message}`);
+function handleErrors(message) {
+  window.alert(`${message}`);
   window.location.href = "index.html";
 }
 
 const usernameDiv = document.getElementById("username");
-usernameDiv.innerHTML = `Olá <strong>${username}</strong> - Você está na sala <strong>${room}</strong>`
+usernameDiv.innerHTML = `Olá <strong>${username}</strong> - Sala <strong>${room}</strong>`
 
 socket.emit("select_room", {
   username,
@@ -38,7 +38,7 @@ socket.emit("select_room", {
 });
 
 document.getElementById("message_input").addEventListener("keypress", (event) => {
-  if(event.key === 'Enter') {
+  if (event.key === 'Enter') {
     const message = event.target.value;
 
     const data = {
@@ -59,14 +59,35 @@ socket.on("message", data => {
 
 function createMessage(data) {
   const messageDiv = document.getElementById("messages");
+  if (data.username == username) {
+    messageDiv.innerHTML += `
+    <div class="my_new_message">
+      <label class="form-label">
+      
+      <strong class="msgUser">${data.username}</strong> 
+      <div class="newText">${data.text}</div>
 
-  messageDiv.innerHTML +=`
+      </label>
+  <div class="horaDia">${dayjs(data.createdAt).format("DD/MM HH:mm")}</div>
+
+    </div>
+    `;
+  } else {
+    messageDiv.innerHTML += `
   <div class="new_message">
     <label class="form-label">
-      <strong>${data.username}</strong> <span>${data.text} - ${dayjs(data.createdAt).format("DD/MM HH:mm")}</span>
-    </label>
+      
+      <strong class="msgUser">${data.username}</strong> 
+      <div class="newText">${data.text}</div>
+
+      </label>
+    <div class="horaDia">${dayjs(data.createdAt).format("DD/MM HH:mm")}</div>
   </div>
+  
   `;
+  }
+  var chatContent = document.getElementById('chat_content');
+  chatContent.scrollTop = chatContent.scrollHeight;
 };
 
 document.getElementById("logout").addEventListener("click", (event) => {

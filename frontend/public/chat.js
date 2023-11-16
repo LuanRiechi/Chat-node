@@ -4,10 +4,15 @@ const room = urlSearch.get('select_room');
 const server = urlSearch.get('server');
 const port = urlSearch.get('port');
 
-const socket = io(`http://${server}:${port}`);
+console.log(`port: ${port}`);
+if (port == 0) {
+  var socket = io(`//${server}`);
+} else {
+  var socket = io(`//${server}:${port}`);
+}
 
-socket.on('connect', (socket) => {
-  console.log(`Socket conectado: ${socket.id}`)
+socket.on('connect', () => {
+  console.log('Conectado ao socket');
 });
 
 socket.on('disconnect', () => {
@@ -28,7 +33,7 @@ function handleErrors(message) {
 }
 
 const usernameDiv = document.getElementById("username");
-usernameDiv.innerHTML = `Sala <strong>${room}</strong>`
+usernameDiv.innerHTML = `Olá <strong>${username}</strong> - Sala <strong>${room}</strong>`
 
 socket.emit("select_room", {
   username,
@@ -37,30 +42,22 @@ socket.emit("select_room", {
   messages.forEach(message => createMessage(message));
 });
 
-function sendMessage() {
-  const messageInput = document.getElementById("message_input");
-  const message = messageInput.value;
-
-  const data = {
-    room,
-    message,
-    username
-  };
-
-  socket.emit("message", data);
-
-  messageInput.value = "";
-}
-
 document.getElementById("message_input").addEventListener("keypress", (event) => {
   if (event.key === 'Enter') {
-    sendMessage();
+    const message = event.target.value;
+
+    const data = {
+      room,
+      message,
+      username
+    }
+
+    socket.emit("message", data);
+
+    event.target.value = "";
   }
 });
 
-document.getElementById("sendMsg").addEventListener("click", () => {
-  sendMessage();
-});
 socket.on("message", data => {
   createMessage(data);
 });
@@ -70,7 +67,7 @@ function createMessage(data) {
   if (data.username == username) {
     messageDiv.innerHTML += `
     <div class="my_new_message">
-      <label class="form-label-my">
+      <label class="form-label">
       
       <strong class="msgUser">${data.username}</strong> 
       <div class="newText">${data.text}</div>
@@ -97,7 +94,6 @@ function createMessage(data) {
   var chatContent = document.getElementById('chat_content');
   chatContent.scrollTop = chatContent.scrollHeight;
 };
-
 
 document.getElementById("logout").addEventListener("click", (event) => {
   socket.disconnect();

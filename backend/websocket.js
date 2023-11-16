@@ -4,7 +4,7 @@ const cors = require("cors");
 const io = new Server({
   cors: {
     origin: "*",
-  },
+  }
 });
 
 const users = [];

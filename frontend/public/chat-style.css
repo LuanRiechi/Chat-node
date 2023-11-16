@@ -156,9 +156,12 @@ input {
 
 .msgUser {
   color: #8907F0;
-  font-size: 16px;
+  font-size: 14px;  
 }
-
+.MymsgUser {
+  color: #7C7C7C;
+  font-size: 14px;
+}
 .newText {
   display: flex;
   margin-top: 5px;

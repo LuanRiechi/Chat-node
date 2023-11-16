@@ -33,7 +33,7 @@ function handleErrors(message) {
 }
 
 const usernameDiv = document.getElementById("username");
-usernameDiv.innerHTML = `Olá <strong>${username}</strong> - Sala <strong>${room}</strong>`
+usernameDiv.innerHTML = `Sala <strong>${room}</strong>`
 
 socket.emit("select_room", {
   username,
@@ -79,7 +79,7 @@ function createMessage(data) {
     <div class="my_new_message">
       <label class="form-label-my">
       
-      <strong class="msgUser">${data.username}</strong> 
+      <strong class="MymsgUser">${data.username}</strong> 
       <div class="newText">${data.text}</div>
 
       </label>

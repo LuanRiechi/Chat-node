@@ -42,20 +42,30 @@ socket.emit("select_room", {
   messages.forEach(message => createMessage(message));
 });
 
-document.getElementById("message_input").addEventListener("keypress", (event) => {
-  if (event.key === 'Enter') {
-    const message = event.target.value;
-
+function sendMessage() {
+  const messageInput = document.getElementById("message_input");
+  const message = messageInput.value;
+  if (message) {
     const data = {
       room,
       message,
       username
-    }
+    };
 
     socket.emit("message", data);
 
-    event.target.value = "";
+    messageInput.value = "";
   }
+}
+
+document.getElementById("message_input").addEventListener("keypress", (event) => {
+  if (event.key === 'Enter') {
+    sendMessage();
+  }
+});
+
+document.getElementById("sendMsg").addEventListener("click", () => {
+  sendMessage();
 });
 
 socket.on("message", data => {

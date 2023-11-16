@@ -6,21 +6,21 @@ const port = urlSearch.get('port');
 
 const socket = io(`http://${server}:${port}`);
 
-socket.on('connect', () => {
-  console.log('Conecatado ao socket');
+socket.on('connect', (socket) => {
+  console.log(`Socket conectado: ${socket.id}`)
 });
 
 socket.on('disconnect', () => {
   console.log('Desconectado do socket');
 });
-/*
+
 socket.on('connect_error', (err) => {
   handleErrors("Erro na Conexão com o Servidor");
 });
 
 socket.on('connect_failed', (err) => {
   handleErrors("Falha na Conexão com o Servidor");
-});*/
+});
 
 function handleErrors(message) {
   window.alert(`${message}`);

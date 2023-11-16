@@ -1,13 +1,3 @@
-FROM node:alpine
-
-WORKDIR /app
-
-COPY package.json package-lock.json ./
-
-RUN npm install --production
-
-COPY . .
-
+FROM nginx:alpine-slim
+COPY /public /usr/share/nginx/html
 EXPOSE 80
-
-CMD ["node", "server.js"]

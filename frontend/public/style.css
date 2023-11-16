@@ -41,7 +41,8 @@ button {
   border-radius: 12px;
   background: #8907F0;
   border: 0px;
-
+  font-size: 16px;
+  font-weight: 700;
 }
 
 button:hover {
@@ -52,7 +53,7 @@ select,
 input {
   width: 75%;
   height: 30px;
-  padding: 5px 0px;
+  padding: 5px 15px;
   outline: none;
   border-radius: 12px;
   border: 1px solid #AEAEAE;
@@ -74,7 +75,7 @@ input {
 
 .row {
   width: 900px;
-  height: 700px;
+  height: 80%;
   display: flex;
   flex-direction: column;
   border-radius: 20px;
@@ -104,6 +105,7 @@ input {
   margin-bottom: 8px;
   margin: auto 5px 10px 5px;
 }
+
 #chat_content {
   max-height: 80%;
   overflow-y: auto;
@@ -116,15 +118,18 @@ input {
   align-items: flex-start;
   font-family: Arial, sans-serif;
   color: #7C7C7C;
-  
+
   font-size: 16px;
 }
-.my_new_message{
+
+.my_new_message {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
   flex-direction: column;
+  width: 98%
 }
+
 .new_message {
   display: flex;
   align-items: flex-end;
@@ -134,11 +139,19 @@ input {
 
 .form-label {
   border-radius: 12px;
-  border: 1px solid  #F9F1FF;
+  border: 1px solid #F9F1FF;
   background: #FEFCFF;
   margin: 15px 0px 0px 15px;
   padding: 13px 20px 13px 20px;
   background: #F9F1FF;
+}
+
+.form-label-my {
+  margin: 15px 0px 0px 15px;
+  padding: 13px 20px 13px 20px;
+  border-radius: 12px;
+  border: 1px solid #AEAEAE;
+  background: #FEFCFF;
 }
 
 .msgUser {

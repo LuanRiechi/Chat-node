@@ -12,7 +12,7 @@ const messages = [];
 const port = 3001;
 
 io.on("connection", (socket) => {
-  console.log(`Socket conectado: ${socket.id}`);
+  console.log(`New Socket! id: ${socket.id}`);
   socket.on("select_room", (data, callback) => {
     socket.join(data.room);
 
@@ -29,7 +29,7 @@ io.on("connection", (socket) => {
         socket_id: socket.id,
       });
     }
-
+    console.log(`Socket linkado: ${socket.id} <-> ${data.username}`);
     const messagesRoom = getMessagesRoom(data.room);
     callback(messagesRoom);
   });
@@ -43,11 +43,14 @@ io.on("connection", (socket) => {
     };
 
     messages.push(message);
-
     io.to(data.room).emit("message", message);
   });
-});
 
+  socket.on("disconnect", () => {
+    console.log(`Socket desconectado: ${socket.id}`);
+  });
+
+});
 function getMessagesRoom(room) {
   const messagesRoom = messages.filter((message) => message.room === room);
   return messagesRoom;

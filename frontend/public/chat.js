@@ -77,7 +77,7 @@ function createMessage(data) {
   if (data.username == username) {
     messageDiv.innerHTML += `
     <div class="my_new_message">
-      <label class="form-label">
+      <label class="form-label-my">
       
       <strong class="msgUser">${data.username}</strong> 
       <div class="newText">${data.text}</div>

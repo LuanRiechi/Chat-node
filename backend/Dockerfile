@@ -1,13 +1,9 @@
-FROM node:alpine
+FROM oven/bun:alpine
 
 WORKDIR /app
-
-COPY package.json package-lock.json .
-
-RUN npm install --production
-
 COPY . .
 
-EXPOSE 3001
+RUN bun install --frozen-lockfile --production
 
-CMD ["node", "websocket.js"]
+EXPOSE 3001
+CMD ["bun", "run", "websocket.js"]

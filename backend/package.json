@@ -1,17 +1,11 @@
 {
   "name": "chat-backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "websocket.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon websocket.js"
+  "module": "websocket.js",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "nodemon": "^3.0.1",
-    "socket.io": "^4.2.0"
+    "socket.io": "^4.7.2"
   }
 }

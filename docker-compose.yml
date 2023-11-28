@@ -11,4 +11,4 @@ services:
     build:
       context: ./frontend
     ports:
-      - "9800:9800"
+      - "9800:3000"

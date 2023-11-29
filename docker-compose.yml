@@ -4,11 +4,13 @@ services:
   backend:
     build:
       context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "3001:3001"
 
   frontend:
     build:
       context: ./frontend
+      dockerfile: Dockerfile.bb
     ports:
       - "9800:3000"

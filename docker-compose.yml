@@ -11,6 +11,6 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.bb
+      dockerfile: Dockerfile.nginx
     ports:
       - "9800:3000"
